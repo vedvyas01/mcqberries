@@ -1,139 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily UPSC Quiz</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    .container {
-      max-width: 600px;
-      background: white;
-      padding: 20px;
-      margin: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-    }
-    .question {
-      margin-bottom: 20px;
-    }
-    .feedback {
-      margin-top: 6px;
-      font-weight: bold;
-    }
-    .correct {
-      color: green;
-    }
-    .wrong {
-      color: red;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #008060;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #005f46;
-    }
-    #result {
-      font-weight: bold;
-      margin-top: 20px;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>Daily UPSC Quiz</h2>
-    <form id="quizForm">
-      <div class="question" id="q1-container">
-        <p>1. Which article of the Indian Constitution deals with the Right to Equality?</p>
-        <label><input type="radio" name="q1" value="a"> Article 14</label><br>
-        <label><input type="radio" name="q1" value="b"> Article 19</label><br>
-        <label><input type="radio" name="q1" value="c"> Article 21</label><br>
-        <label><input type="radio" name="q1" value="d"> Article 32</label>
-        <div class="feedback" id="q1-feedback"></div>
-      </div>
-      
-      <!-- Questions 2 through 20 -->
-      <!-- You can duplicate and modify q1-container for all 20 questions -->
-      <!-- For brevity, here are 2 to 20 abbreviated and using same logic -->
+<!-- [HEAD and styling remain unchanged, same as before] -->
+<!-- ... (keep everything before <form id="quizForm"> as it is) -->
 
-      <!-- I'll insert all 20 fully now below -->
+<form id="quizForm">
 
-      <!-- (Questions 2 to 19 here, same format) -->
-      <!-- Example q2 -->
-      <div class="question" id="q2-container">
-        <p>2. Which planet is known as the Red Planet?</p>
-        <label><input type="radio" name="q2" value="a"> Earth</label><br>
-        <label><input type="radio" name="q2" value="b"> Mars</label><br>
-        <label><input type="radio" name="q2" value="c"> Jupiter</label><br>
-        <label><input type="radio" name="q2" value="d"> Venus</label>
-        <div class="feedback" id="q2-feedback"></div>
-      </div>
-
-      <!-- Repeat similarly for q3 to q20 -->
-      <!-- Skipping straight to q20 for this example -->
-      <div class="question" id="q20-container">
-        <p>20. Who was known as the Iron Man of India?</p>
-        <label><input type="radio" name="q20" value="a"> Lala Lajpat Rai</label><br>
-        <label><input type="radio" name="q20" value="b"> Sardar Vallabhbhai Patel</label><br>
-        <label><input type="radio" name="q20" value="c"> Jawaharlal Nehru</label><br>
-        <label><input type="radio" name="q20" value="d"> Bal Gangadhar Tilak</label>
-        <div class="feedback" id="q20-feedback"></div>
-      </div>
-
-      <button type="submit">Submit</button>
-    </form>
-    <div id="result"></div>
+  <!-- Sample of a question block with new "answer feedback" span -->
+  <div class="question" id="q1-container">
+    <p>1. Which article of the Indian Constitution deals with the Right to Equality?</p>
+    <label><input type="radio" name="q1" value="a"> Article 14</label>
+    <label><input type="radio" name="q1" value="b"> Article 19</label>
+    <label><input type="radio" name="q1" value="c"> Article 21</label>
+    <label><input type="radio" name="q1" value="d"> Article 32</label>
+    <div class="feedback" id="q1-feedback"></div>
   </div>
 
-  <script>
-    document.getElementById("quizForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      let score = 0;
-      const answers = {
-        q1: "a", q2: "b", q3: "b", q4: "c", q5: "c",
-        q6: "b", q7: "b", q8: "c", q9: "a", q10: "c",
-        q11: "b", q12: "d", q13: "b", q14: "b", q15: "b",
-        q16: "c", q17: "c", q18: "c", q19: "d", q20: "b"
-      };
+  <!-- Repeat this pattern for all other 19 questions... just add:
+       <div class="feedback" id="qX-feedback"></div> inside each question -->
 
-      const form = new FormData(event.target);
+  <!-- Example for last question -->
+  <div class="question" id="q20-container">
+    <p>20. Who was known as the Iron Man of India?</p>
+    <label><input type="radio" name="q20" value="a"> Lala Lajpat Rai</label>
+    <label><input type="radio" name="q20" value="b"> Sardar Vallabhbhai Patel</label>
+    <label><input type="radio" name="q20" value="c"> Jawaharlal Nehru</label>
+    <label><input type="radio" name="q20" value="d"> Bal Gangadhar Tilak</label>
+    <div class="feedback" id="q20-feedback"></div>
+  </div>
 
-      for (let [q, correct] of Object.entries(answers)) {
-        const selected = form.get(q);
-        const feedback = document.getElementById(`${q}-feedback`);
-        if (selected === correct) {
-          score++;
-          feedback.innerText = "Correct!";
-          feedback.className = "feedback correct";
-        } else if (selected === null) {
-          feedback.innerText = `No answer selected. Correct answer: ${correct.toUpperCase()}`;
-          feedback.className = "feedback wrong";
-        } else {
-          feedback.innerText = `Wrong. Correct answer: ${correct.toUpperCase()}`;
-          feedback.className = "feedback wrong";
-        }
-      }
+  <button type="submit">Submit</button>
+</form>
+<div id="result"></div>
 
-      document.getElementById("result").innerText = `You scored ${score} out of ${Object.keys(answers).length}`;
-    });
-  </script>
-</body>
-</html>
+<!-- Add this to your <style> section -->
+<style>
+  .feedback {
+    margin-top: 6px;
+    font-weight: bold;
+  }
+  .correct {
+    color: green;
+  }
+  .wrong {
+    color: red;
+  }
+</style>
+
+<!-- Add this JavaScript section at the bottom -->
+<script>
+  document.getElementById("quizForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    let score = 0;
+    const answers = {
+      q1: "a", q2
